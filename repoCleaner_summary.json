@@ -1,15 +1,9 @@
 {
-  "deleted_branches": [
-    {
-      "repo": "docs",
-      "branches": ["feature/old-branch1", "feature/old-branch2"]
-    },
-    {
-      "repo": "gh-ost",
-      "branches": ["feature/old-branch3"]
-    }
-  ],
-  "recommendations": [
-    "Consider deleting the repository 'dmca' as all branches are stale."
-  ]
+    "deleted_branches": [
+        {
+            "repo": "DPG-guidance",
+            "branch": "main"
+        }
+    ],
+    "recommendations": []
 }
