@@ -72,10 +72,21 @@ def delete_branch(owner, repo, branch):
         logging.error(f"Failed to delete branch {branch} in repo {repo}: {response.json()}")
         return False
 
+# Generate executive summary
+def generate_summary(repos, deleted_branches):
+    summary = {"deleted_branches": deleted_branches, "recommendations": []}
+    
+    # Writing the summary to a JSON file after cleanup
+    with open('repoCleaner_summary.json', 'w') as summary_file:
+        json.dump(summary, summary_file, indent=4)
+
+    print("Executive Summary has been generated. Check 'repoCleaner_summary.json'.")
+
 # Main function to run repoCleaner logic
 def repo_cleaner(file_path):
     repos = read_repositories(file_path)
     one_year_ago = datetime.now() - timedelta(days=365)  # Time window = 1 year
+    deleted_branches = []
 
     for repo_url in repos:
         # Extract the owner and repo name from the URL
@@ -101,6 +112,7 @@ def repo_cleaner(file_path):
                 print(f"Deleting branches: {', '.join(to_delete)}")
                 for branch in to_delete:
                     if delete_branch(owner, repo, branch):
+                        deleted_branches.append({"repo": repo, "branch": branch})
                         print(f"Deleted branch: {branch}")
                     else:
                         print(f"Failed to delete branch: {branch}")
@@ -111,18 +123,8 @@ def repo_cleaner(file_path):
         
         print(f"Finished processing {repo}.")
     
-    # Generate summary after the operation
-    generate_summary(repos)
-
-# Generate executive summary
-def generate_summary(repos):
-    summary = {"deleted_branches": [], "recommendations": []}
-    for repo_url in repos:
-        owner, repo = repo_url.split('/')[-2], repo_url.split('/')[-1]
-        with open('repoCleaner_summary.json', 'w') as summary_file:
-            json.dump(summary, summary_file, indent=4)
-    
-    print("Executive Summary has been generated. Check 'repoCleaner_summary.json'.")
+    # Generate the summary with deleted branches
+    generate_summary(repos, deleted_branches)
 
 if __name__ == "__main__":
     repo_cleaner('masterRepoList.txt')
