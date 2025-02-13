@@ -1,4 +1,4 @@
-https://github.com/github/docs
-https://github.com/github/gh-ost
-https://github.com/github/dmca
-https://github.com/github/DPG-guidance
+https://github.com/kameshwaranvelu/docs
+https://github.com/kameshwaranvelu/gh-ost
+https://github.com/kameshwaranvelu/dmca
+https://github.com/kameshwaranvelu/DPG-guidance
