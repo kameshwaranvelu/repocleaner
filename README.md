@@ -16,5 +16,8 @@ A utility to clean stale GitHub repositories and branches. It helps manage your 
 
 - Python 3.6+ is required.
 - A GitHub personal access token (PAT) for authentication. Set it in your environment as `GITHUB_TOKEN`.
+- Install requirement text file
+- clone repo
+- Run repocleaner file
 
 
